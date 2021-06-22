@@ -442,7 +442,7 @@ std_dll_init ()
 	  if ((func->decoration & 1))
 	    dll->handle = INVALID_HANDLE_VALUE;
 	  else
-	    api_fatal ("unable to load %W, %E", dll->name);
+	    api_fatal ("unable to load %W for %s, %E", dll->name, func->name);
 	}
       fesetenv (&fpuenv);
     }
