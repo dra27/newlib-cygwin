@@ -2489,7 +2489,7 @@ pwdgrp::fetch_account_from_windows (fetch_user_arg_t &arg, cyg_ldap *pldap)
 	    {
 	      NET_API_STATUS nas;
 	      PUSER_INFO_3 ui;
-	      PLOCALGROUP_INFO_1 gi;
+	      /*PLOCALGROUP_INFO_1 gi;*/
 	      char *pgrp = NULL;
 	      char *uxid = NULL;
 
@@ -2517,23 +2517,23 @@ pwdgrp::fetch_account_from_windows (fetch_user_arg_t &arg, cyg_ldap *pldap)
 		}
 	      else /* acc_type == SidTypeAlias */
 		{
-		  nas = NetLocalGroupGetInfo (NULL, name, 1, (PBYTE *) &gi);
+		  /*nas = NetLocalGroupGetInfo (NULL, name, 1, (PBYTE *) &gi);
 		  if (nas != NERR_Success)
 		    {
 		      debug_printf ("NetLocalGroupGetInfo(%W) %u", name, nas);
 		      break;
-		    }
+		    }*/
 		  /* Overwrite name to be sure case is same as in SAM */
-		  wcscpy (name, gi->lgrpi1_name);
+		  /*wcscpy (name, gi->lgrpi1_name);*/
 		  /* Fetch unix gid from comment field. */
-		  uxid = fetch_from_description (gi->lgrpi1_comment,
-						 L"unix=\"", 6);
+		  /*uxid = fetch_from_description (gi->lgrpi1_comment,
+						 L"unix=\"", 6);*/
 		}
 
 	      if (acc_type == SidTypeUser)
 		NetApiBufferFree (ui);
-	      else
-		NetApiBufferFree (gi);
+	      /*else
+		NetApiBufferFree (gi);*/
 	      if (pgrp)
 		{
 		  /* Set primary group from the "Description" field.  Prepend
