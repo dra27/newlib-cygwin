@@ -2830,16 +2830,16 @@ ga_dup (struct addrinfoW *ai, bool v4mapped, int idn_flags, int &err)
       if (idn_flags & AI_CANONIDN)
 	{
 	  /* Map flags to equivalent IDN_* flags. */
-	  wchar_t *canonbuf = tp.w_get ();
+	  /*wchar_t *canonbuf = tp.w_get ();
 	  if (IdnToUnicode (idn_flags >> 16, canonname, -1,
 			    canonbuf, NT_MAX_PATH))
 	    canonname = canonbuf;
 	  else if (GetLastError () != ERROR_PROC_NOT_FOUND)
-	    {
+	    {*/
 	      free (nai);
 	      err = EAI_IDN_ENCODE;
 	      return NULL;
-	    }
+	    /*}*/
 	}
       size_t len = wcstombs (NULL, canonname, 0);
       if (len == (size_t) -1)
@@ -3019,10 +3019,10 @@ cygwin_getaddrinfo (const char *hostname, const char *servname,
 	  if (idn_flags & AI_IDN)
 	    {
 	      /* Map flags to equivalent IDN_* flags. */
-	      wchar_t *ascbuf = tp.w_get ();
+	      /*wchar_t *ascbuf = tp.w_get ();
 	      if (IdnToAscii (idn_flags >> 16, whost, -1, ascbuf, NT_MAX_PATH))
 		whost = ascbuf;
-	      else if (GetLastError () != ERROR_PROC_NOT_FOUND)
+	      else if (GetLastError () != ERROR_PROC_NOT_FOUND)*/
 		return EAI_IDN_ENCODE;
 	    }
 	}
@@ -3133,11 +3133,11 @@ cygwin_getnameinfo (const struct sockaddr *sa, socklen_t salen,
 	      if (idn_flags & NI_IDN)
 		{
 		  /* Map flags to equivalent IDN_* flags. */
-		  wchar_t *idnbuf = tp.w_get ();
+		  /*wchar_t *idnbuf = tp.w_get ();
 		  if (IdnToUnicode (idn_flags >> 16, whost, -1,
 				    idnbuf, NT_MAX_PATH))
 		    whost = idnbuf;
-		  else if (GetLastError () != ERROR_PROC_NOT_FOUND)
+		  else if (GetLastError () != ERROR_PROC_NOT_FOUND)*/
 		    return EAI_IDN_ENCODE;
 		}
 	      src = whost;
